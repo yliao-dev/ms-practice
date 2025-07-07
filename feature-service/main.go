@@ -40,7 +40,7 @@ func FeatureFlagHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/feature/", FeatureFlagHandler)
-	fmt.Println("Feature service serving port on 80801")
+	http.HandleFunc("/features/", FeatureFlagHandler)
+	fmt.Println("Feature service serving port on 8081")
 	log.Fatal(http.ListenAndServe(":8081", nil))
 }
