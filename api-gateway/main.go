@@ -5,11 +5,18 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 )
 
-const featureServiceURL = "http://localhost:8081"
+var featureServiceURL = "http://localhost:8081"
+func init() {
+    if url, exists := os.LookupEnv("FEATURE_SERVICE_URL"); exists {
+        featureServiceURL = url
+    }
+}
+
 
 func GatewayHandler(w http.ResponseWriter, r *http.Request){
 	featureName := strings.TrimPrefix(r.URL.Path, "/v1/features/")

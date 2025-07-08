@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  feature-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        service_dir: feature-service
+    container_name: feature-service
+    ports:
+      - "8081:8081"
+  api-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        service_dir: api-gateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      FEATURE_SERVICE_URL: http://feature-service:8081
+    depends_on:
+      - feature-service
